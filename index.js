@@ -8,7 +8,7 @@ const app = express(),
 global.mongoose = require("mongoose");
 
 // create connection with mongoDB server
-require("./mongo.config");
+require("./config/mongo.config");
 
 // CORS Options
 const corsOptions = {
@@ -28,6 +28,10 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 const port = process.env.PORT || 3000;
+
+// creating multi tenant connections
+const tenantUtil = require("./utilility/tenant.util");
+tenantUtil.createConnectionPool();
 
 // create http server
 const server = http.createServer(app);
