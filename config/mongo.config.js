@@ -1,4 +1,5 @@
-const connectionURI = process.env.MONGODB_URI || "mongodb://127.0.0.1/masterDB";
+const connectionURI =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/masterDB";
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
