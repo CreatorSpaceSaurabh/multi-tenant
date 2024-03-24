@@ -7,7 +7,14 @@ const app = express(),
   http = require("http"),
   bodyParser = require("body-parser");
 global.mongoose = require("mongoose");
-
+const utils = require("./utilility/utils");
+const constantEnums = require("./constants/constant.enums");
+const userEnums = require("./constants/user.enums");
+const reponseHandler = require("./helpers/handler");
+global.utils = utils;
+global.constantEnums = constantEnums;
+global.userEnums = userEnums;
+global.responseHandler = reponseHandler;
 // create connection with mongoDB server
 require("./config/mongo.config");
 
