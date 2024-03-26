@@ -1,4 +1,5 @@
 const route = express.Router();
+const UserController = require("../controller/user.controller");
 
 class Routes {
   constructor() {
@@ -13,10 +14,16 @@ class Routes {
     this.deleteRoutes();
   }
 
-  getRoutes() {}
+  getRoutes() {
+    this.route.get("/list", (req, res, next) => {
+      UserController.listUser(req, res, next);
+    });
+  }
 
   postRoutes() {
-    this.route.post("/add", (req, res, next) => {});
+    this.route.post("/add", (req, res, next) => {
+      UserController.addUser(req, res, next);
+    });
   }
 
   putRoutes() {}
