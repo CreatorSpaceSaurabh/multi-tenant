@@ -39,8 +39,9 @@ const port = process.env.PORT || 3000;
 
 // creating multi tenant connections
 const tenantUtil = require("./utilility/tenant.util");
+const UserRouter = require("./routes/user.route");
 tenantUtil.createConnectionPool();
-
+app.use("/api/v1", UserRouter);
 // create http server
 const server = http.createServer(app);
 module.exports = server.listen(port, () => {

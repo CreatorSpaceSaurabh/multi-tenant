@@ -1,4 +1,5 @@
-const UserService = require("../services/user.service");
+const { reponseHandler } = require("../helpers/handler");
+const userService = require("../services/user.service");
 
 class UserController {
   /***
@@ -19,7 +20,8 @@ class UserController {
         role: "user",
         tenantName,
       };
-      await UserService.addUser(payload, next)
+      await userService
+        .addUser(payload, next)
         .then((data) => {
           reponseHandler(res, data);
         })
@@ -46,7 +48,8 @@ class UserController {
         role: "user",
         tenantName,
       };
-      await UserService.addUser(payload, next)
+      await userService
+        .addUser(payload, next)
         .then((data) => {
           reponseHandler(res, data);
         })
@@ -59,3 +62,6 @@ class UserController {
     }
   }
 }
+
+const userController = new UserController();
+module.exports = userController;
