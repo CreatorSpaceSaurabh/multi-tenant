@@ -71,4 +71,5 @@ class UserService {
     }
   }
 }
-module.exports = UserService;
+const userService = new UserService();
+module.exports = userService;
