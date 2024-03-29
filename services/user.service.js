@@ -9,10 +9,7 @@ class UserService {
    */
   async addUser(data, next) {
     try {
-      const userRecord = await utils.createDocument(
-        User[data.tenantName],
-        data
-      );
+      const userRecord = await utils.saveDocument(User[data.tenantName], data);
       console.log("UserRecord --", userRecord);
       if (userRecord) {
         return {
