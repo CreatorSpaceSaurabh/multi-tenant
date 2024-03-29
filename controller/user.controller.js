@@ -1,6 +1,5 @@
-const { reponseHandler } = require("../helpers/handler");
 const userService = require("../services/user.service");
-
+const helper = require("../helpers/handler");
 class UserController {
   /***
    * @summary To add user entry
@@ -24,13 +23,13 @@ class UserController {
         .addUser(payload, next)
         .then((data) => {
           console.log("Data controller -", data);
-          reponseHandler(res, data);
+          helper.reponseHandler(res, data);
         })
         .catch((error) => {
-          responseHandler(res, error);
+          helper.reponseHandler(res, error);
         });
     } catch (error) {
-      console.log("Error log - add User", error.message);
+      console.log("Error log - add User", error);
       next(error.message);
     }
   }
@@ -50,12 +49,12 @@ class UserController {
         tenantName,
       };
       await userService
-        .addUser(payload, next)
+        .listUser(payload, next)
         .then((data) => {
-          reponseHandler(res, data);
+          helper.reponseHandler(res, data);
         })
         .catch((error) => {
-          responseHandler(res, error);
+          helper.responseHandler(res, error);
         });
     } catch (error) {
       console.log("Error log - add User", error.message);

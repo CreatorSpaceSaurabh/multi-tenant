@@ -1,4 +1,6 @@
 const User = require("../Models/users.model");
+const constantEnums = require("../constants/constant.enums");
+const userEnums = require("../constants/user.enums");
 class UserService {
   /***
    * @summary To add user entry
@@ -13,7 +15,7 @@ class UserService {
       console.log("UserRecord --", userRecord);
       if (userRecord) {
         return {
-          code: constantEnums.statusCode.ok,
+          code: constantEnums.statusCode.OK,
           flag: constantEnums.flag.TRUE,
           message: userEnums.responseMessage.USER_ADDED_SUCCESS,
           data: userRecord,
@@ -42,17 +44,17 @@ class UserService {
   async listUser(data, next) {
     try {
       const userRecord = await utils.findAllRecords(
-        model[data.tenantName],
+        User[data.tenantName],
         { role: data.role },
         {}
       );
       console.log("UserRecord listUser--", userRecord);
       if (userRecord) {
         return {
-          code: constantEnums.statusCode.ok,
+          code: constantEnums.statusCode.OK,
           flag: constantEnums.flag.TRUE,
           message: userEnums.responseMessage.USER_FETCHED_SUCCESS,
-          data: userRecord,
+          data: { userRecord, count: userRecord.length },
         };
       } else {
         return {
