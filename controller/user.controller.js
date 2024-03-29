@@ -23,6 +23,7 @@ class UserController {
       await userService
         .addUser(payload, next)
         .then((data) => {
+          console.log("Data controller -", data);
           reponseHandler(res, data);
         })
         .catch((error) => {
