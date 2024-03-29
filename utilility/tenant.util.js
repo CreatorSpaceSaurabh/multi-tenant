@@ -13,10 +13,10 @@ const createConnectionPool = async () => {
     let tenantDetails = {};
     // actual logic to fetch individual tenant details from master DB, using db.collections.find(condition)
     console.log("Tenants list ", tenants);
-    await Object.keys(tenants).forEach((ele) => {
-      if (ele.tenantId != null) {
-        const connectionName = createTenantConnection(ele);
-        tenantDetails[ele.tenantId] = connectionName;
+    await Object.keys(tenants).forEach(async (ele) => {
+      if (tenants[ele].tenantId != null) {
+        const connectionName = await createTenantConnection(tenants[ele]);
+        tenantDetails[tenants[ele].tenantId] = connectionName;
       }
     });
     global.tenantPool = tenantDetails;
@@ -34,14 +34,14 @@ const createConnectionPool = async () => {
  * @date 21 Mar 2024
  */
 
-const createTenantConnection = (tenant) => {
+const createTenantConnection = async (tenant) => {
   let options = {
     // user: tenant.user,
     // pass: tenant.pass,
     useNewUrlParser: true,
     useUnifiedTopology: true,
   };
-  const db = mongoose.createConnection(tenant.host, options);
+  const db = mongoose.createConnection(tenant.host);
   db.on("error", function (error) {
     console.log("MongoDB :: Tenant create connection error", error);
     db.close().catch(() =>
