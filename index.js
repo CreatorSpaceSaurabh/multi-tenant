@@ -16,7 +16,8 @@ global.constantEnums = constantEnums;
 global.userEnums = userEnums;
 global.responseHandler = reponseHandler;
 // create connection with mongoDB server
-require("./config/mongo.config");
+const mongo = require("./config/mongo.config");
+mongo.connect();
 
 // CORS Options
 const corsOptions = {
